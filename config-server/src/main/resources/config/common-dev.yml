@@ -1,0 +1,39 @@
+spring:
+  #数据源的配置
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3307/db_his?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+    username: root
+    password: 123
+    #注入数据源的类型   默认的为HikariDataSource
+    type: com.zaxxer.hikari.HikariDataSource
+    hikari:
+      minimum-idle: 5
+      idle-timeout: 180000  # 空闲连接存活最大时间，默认600000（10分钟）
+      maximum-pool-size: 10 # 连接池最大连接数，默认是10
+      auto-commit: true # 此属性控制从池返回的连接的默认自动提交行为,默认值：true
+      pool-name: MyHikariCP # 连接池名称
+      max-lifetime: 1800000 # 此属性控制池中连接的最长生命周期，值0表示无限生命周期，默认1800000即30分钟
+      connection-timeout: 30000 # 数据库连接超时时间,默认30秒，即30000
+      connection-test-query: SELECT 1
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+        service: aaa
+    sentinel:
+      transport:
+        dashboard: 127.0.0.1:8078  #sentinel控制台
+        port: 8719
+#dubbo配置
+dubbo:
+  registry:
+    address: nacos://127.0.0.1:8848
+    timeout: 10000
+  protocol:
+    name: dubbo
+    port: -1
+  consumer:
+    check: false
+  config-center:
+    timeout: 10000
