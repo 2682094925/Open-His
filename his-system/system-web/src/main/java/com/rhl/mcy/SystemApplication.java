@@ -14,7 +14,6 @@ import java.util.Collections;
 public class SystemApplication {
 
     public static void main(String[] args) {
-        Collections.sort(null,null);
         SpringApplication.run(SystemApplication.class,args);
     }
 }
